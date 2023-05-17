@@ -48,7 +48,7 @@ function App() {
             <form className="pw-form">
                 <div className="pw-form-item">
                     <input type={"text"} placeholder={"Password"} value={password} readOnly={true}/>
-                    <button onClick={copyToClipboard} className="copy-btn">Copy</button>
+                    {(password && password !== "Please select at least one character type.") && <button onClick={copyToClipboard} className="copy-btn">Copy</button>}
 
                 </div>
                 <div className="pw-form-other">
