@@ -1,19 +1,52 @@
-# README
 
-## About
+# Password Generator
 
-This is the official Wails React-TS template.
+This application is a simple yet powerful password generator built using Wails and React. It allows the user to generate a password of a specified length, including a mix of uppercase letters, lowercase letters, numbers, and special characters.
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+## Prerequisites
 
-## Live Development
+- [Go](https://golang.org/doc/install) >= 1.16
+- [Node.js](https://nodejs.org/en/download/) >= 14
+- [Wails](https://wails.app/home/) >= v2
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+## Installation
 
-## Building
+1. Clone the repository
+```bash
+git clone https://github.com/eestaniel/password_generator2.git
+cd password-generator
+```
+2. Install the dependencies
+```bash
+wails setup
+cd frontend
+npm install
+cd ..
+```
+3. Build the application
+```bash
+wails build
+```
+## Run the application
 
-To build a redistributable, production mode package, use `wails build`.
+After building the application, you can find the executable in the `build` directory. To run the application, navigate to the `build` directory and run the executable file.
+
+On Linux or Mac:
+
+```bash
+cd build
+./password-generator
+rve
+```
+
+## Usage
+
+When you open the application, you will see a form where you can select the types of characters to include in the password and the length of the password. After selecting your preferences, click the "Generate Password" button to generate a password. The generated password will appear in the text box at the top of the form. You can then copy the password to the clipboard by clicking the "Copy" button next to the password.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
