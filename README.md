@@ -5,10 +5,17 @@ This application is a simple yet powerful password generator built using Wails a
 
 ## Prerequisites
 
-- [Go](https://golang.org/doc/install) >= 1.16
-- [Node.js](https://nodejs.org/en/download/) >= 14
-- [Wails](https://wails.app/home/) >= v2
+Before running this application, you need to ensure that Go, Node.js and npm/yarn are installed on your machine.
 
+* Install [Go](https://golang.org/dl/)
+* Install [Node.js](https://nodejs.org/en/download/)
+* Install npm/yarn. If you installed Node.js from the above step, npm would have been installed as well. If you wish to use yarn, install it by running `npm install --global yarn`.
+
+Additionally, install Wails by running the following command:
+
+```bash
+go install github.com/wailsapp/wails/v2/cmd/wails@latest
+````
 ## Installation
 
 1. Clone the repository
@@ -18,7 +25,6 @@ cd password-generator
 ```
 2. Install the dependencies
 ```bash
-wails setup
 cd frontend
 npm install
 cd ..
