@@ -3,6 +3,10 @@
 
 This application is a simple yet powerful password generator built using Wails and React. It allows the user to generate a password of a specified length, including a mix of uppercase letters, lowercase letters, numbers, and special characters.
 
+## Images
+![img1](/imgs/img1.png)
+![img1](/imgs/img2.png)
+
 ## Prerequisites
 
 Before running this application, you need to ensure that Go, Node.js and npm/yarn are installed on your machine.
@@ -21,29 +25,23 @@ go install github.com/wailsapp/wails/v2/cmd/wails@latest
 1. Clone the repository
 ```bash
 git clone https://github.com/eestaniel/password_generator2.git
-cd password-generator
+cd password-generator/app
 ```
-2. Install the dependencies
-```bash
-cd frontend
-npm install
-cd ..
+## Run the application in development mode
+```sh
+wails dev
 ```
-3. Build the application
-```bash
+
+
+## Building the application
+
+```sh
 wails build
 ```
-## Run the application
 
-After building the application, you can find the executable in the `build` directory. To run the application, navigate to the `build` directory and run the executable file.
+After building the application, you can find the executable in the `build/bin` directory. 
+To run the application, navigate to the `build/bin` directory and run the executable file.
 
-On Linux or Mac:
-
-```bash
-cd build
-./password-generator
-rve
-```
 
 ## Usage
 
