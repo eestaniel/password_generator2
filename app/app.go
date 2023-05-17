@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"unicode"
+	"strings"
 )
 
 // App struct
@@ -29,56 +29,46 @@ func (a *App) Greet(name string) string {
 }
 
 func (a *App) GeneratePassword(password_length int, doUpper bool, doLower bool, doNumber bool, doSpecial bool) string {
-	alphabet := ""
-	flags := make(map[string]bool)
-	if doUpper == true {
-		alphabet += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		flags["Uppercase"] = false
+	types := []string{}
+	if doUpper {
+		types = append(types, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	}
-	if doLower == true {
-		alphabet += "abcdefghijklmnopqrstuvwxyz"
-		flags["Lowercase"] = false
+	if doLower {
+		types = append(types, "abcdefghijklmnopqrstuvwxyz")
 	}
-	if doNumber == true {
-		alphabet += "0123456789"
-		flags["Number"] = false
+	if doNumber {
+		types = append(types, "0123456789")
 	}
-	if doSpecial == true {
-		alphabet += "!@#$%^&*()_+"
-		flags["Special"] = false
+	if doSpecial {
+		types = append(types, "!@#$%^&*()_+")
 	}
-	if doUpper == false && doLower == false && doNumber == false && doSpecial == false {
+	if len(types) == 0 {
 		return "Please select at least one character type."
 	}
-	password := ""
-	valid := false
-	for !valid {
-		for i := 0; i < password_length; i++ {
-			char := string(alphabet[rand.Intn(len(alphabet))])
-			password += char
-			for key, _ := range flags {
-				if unicode.IsUpper(rune(char[0])) && key == "Uppercase" {
-					flags[key] = true
-				} else if unicode.IsLower(rune(char[0])) && key == "Lowercase" {
-					flags[key] = true
-				} else if unicode.IsNumber(rune(char[0])) && key == "Number" {
-					flags[key] = true
-				} else if unicode.IsPunct(rune(char[0])) && key == "Special" {
-					flags[key] = true
-				}
-			}
-		}
-		for _, value := range flags {
-			if value == false {
-				password = ""
-				for key, _ := range flags {
-					flags[key] = false
-				}
-				continue
-			}
-		}
-		valid = true
-	}
-	return password
 
+	alphabet := strings.Join(types, "")
+
+	for {
+		// Generate a password
+		password := ""
+		for i := 0; i < password_length; i++ {
+			password += string(alphabet[rand.Intn(len(alphabet))])
+		}
+
+		// Check if it contains at least one character from each type
+		valid := true
+		for _, t := range types {
+			if !strings.ContainsAny(password, t) {
+				valid = false
+				break
+			}
+		}
+
+		// If the password is valid, return it
+		if valid {
+			return password
+		}
+
+		// If not, generate a new password in the next iteration
+	}
 }
