@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import './App.css';
-import {Greet, GeneratePassword} from "../wailsjs/go/main/App";
+import {GeneratePassword} from "../wailsjs/go/main/App";
 
 function App() {
     const [password, setPassword] = useState("")
