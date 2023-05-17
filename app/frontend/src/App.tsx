@@ -12,8 +12,13 @@ function App() {
         special: false
     })
     const lengthSlider = document.getElementById("length_slider") as HTMLInputElement
-    const lengthInput = document.getElementById("length_input")as HTMLInputElement;
+    const lengthInput = document.getElementById("length_input") as HTMLInputElement;
 
+
+    function copyToClipboard(e: React.MouseEvent) {
+        navigator.clipboard.writeText(password);
+        e.preventDefault();
+    }
 
     function handleCheckBoxChange(e: { target: { id: string; checked: boolean; }; }) {
         setCheckbox({
@@ -23,8 +28,7 @@ function App() {
     }
 
     function generatePassword(e: { preventDefault: () => void; }) {
-        console.log(checkbox["uppercase"])
-        GeneratePassword(length).then((res: any) => {
+        GeneratePassword(length, checkbox["uppercase"], checkbox["lowercase"], checkbox["number"], checkbox["special"]).then((res: any) => {
             setPassword(res)
         })
         e.preventDefault()
@@ -44,14 +48,18 @@ function App() {
             <form className="pw-form">
                 <div className="pw-form-item">
                     <input type={"text"} placeholder={"Password"} value={password} readOnly={true}/>
+                    <button onClick={copyToClipboard} className="copy-btn">Copy</button>
+
                 </div>
                 <div className="pw-form-other">
                     <div className="checkbox">
-                        <input type="checkbox" id={"uppercase"} checked={checkbox.uppercase} onChange={handleCheckBoxChange}/>
+                        <input type="checkbox" id={"uppercase"} checked={checkbox.uppercase}
+                               onChange={handleCheckBoxChange}/>
                         <label htmlFor={"uppercase"}>uppercase</label>
                     </div>
                     <div className="checkbox">
-                        <input type="checkbox" id={"lowercase"} checked={checkbox.lowercase} onChange={handleCheckBoxChange}/>
+                        <input type="checkbox" id={"lowercase"} checked={checkbox.lowercase}
+                               onChange={handleCheckBoxChange}/>
                         <label htmlFor={"lowercase"}>lowercase</label>
                     </div>
                     <div className="checkbox">
@@ -59,13 +67,16 @@ function App() {
                         <label htmlFor={"number"}>number</label>
                     </div>
                     <div className="checkbox">
-                        <input type="checkbox" id={"special"} checked={checkbox.special} onChange={handleCheckBoxChange}/>
+                        <input type="checkbox" id={"special"} checked={checkbox.special}
+                               onChange={handleCheckBoxChange}/>
                         <label htmlFor={"special"}>special</label>
                     </div>
                     <div className="slider">
-                        <input type="range" id={"length_slider"} min={"1"} max={"256"} value={length} onChange={handleLengthChange}/>
+                        <input type="range" id={"length_slider"} min={"1"} max={"256"} value={length}
+                               onChange={handleLengthChange}/>
                         <label htmlFor={"length"}></label>
-                        <input type="number" id={"length_input"} min={"1"} max={"256"} value={length} onChange={handleLengthChange}/>
+                        <input type="number" id={"length_input"} min={"1"} max={"256"} value={length}
+                               onChange={handleLengthChange}/>
                         <label htmlFor={"length_input"}></label>
                     </div>
                 </div>

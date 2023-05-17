@@ -28,38 +28,57 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) GeneratePassword(password_length int) string {
-	alphabet := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"
-	uppercase := false
-	lowercase := false
-	number := false
-	special := false
-	valid := false
+func (a *App) GeneratePassword(password_length int, doUpper bool, doLower bool, doNumber bool, doSpecial bool) string {
+	alphabet := ""
+	flags := make(map[string]bool)
+	if doUpper == true {
+		alphabet += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		flags["Uppercase"] = false
+	}
+	if doLower == true {
+		alphabet += "abcdefghijklmnopqrstuvwxyz"
+		flags["Lowercase"] = false
+	}
+	if doNumber == true {
+		alphabet += "0123456789"
+		flags["Number"] = false
+	}
+	if doSpecial == true {
+		alphabet += "!@#$%^&*()_+"
+		flags["Special"] = false
+	}
+	if doUpper == false && doLower == false && doNumber == false && doSpecial == false {
+		return "Please select at least one character type."
+	}
 	password := ""
-
+	valid := false
 	for !valid {
 		for i := 0; i < password_length; i++ {
 			char := string(alphabet[rand.Intn(len(alphabet))])
 			password += char
-			if unicode.IsUpper(rune(char[0])) {
-				uppercase = true
-			} else if unicode.IsLower(rune(char[0])) {
-				lowercase = true
-			} else if unicode.IsNumber(rune(char[0])) {
-				number = true
-			} else if unicode.IsPunct(rune(char[0])) {
-				special = true
+			for key, _ := range flags {
+				if unicode.IsUpper(rune(char[0])) && key == "Uppercase" {
+					flags[key] = true
+				} else if unicode.IsLower(rune(char[0])) && key == "Lowercase" {
+					flags[key] = true
+				} else if unicode.IsNumber(rune(char[0])) && key == "Number" {
+					flags[key] = true
+				} else if unicode.IsPunct(rune(char[0])) && key == "Special" {
+					flags[key] = true
+				}
 			}
 		}
-		if uppercase && lowercase && number && special {
-			valid = true
-		} else {
-			password = ""
-			uppercase = false
-			lowercase = false
-			number = false
-			special = false
+		for _, value := range flags {
+			if value == false {
+				password = ""
+				for key, _ := range flags {
+					flags[key] = false
+				}
+				continue
+			}
 		}
+		valid = true
 	}
 	return password
+
 }
