@@ -26,13 +26,29 @@ body {
   margin-top: 20px;
 }
 
+.pw-form-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .pw-form-item input {
+  flex-grow: 1;
+  margin-right: 1em;
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin-bottom: 10px;
+
   box-sizing: border-box;
+}
+
+.copy-btn {
+  padding: 0.5em;
+  font-size: 0.8em;
+  width: 5rem;
+  height: 2.2rem;
 }
 
 .pw-form-other {
