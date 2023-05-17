@@ -4,8 +4,9 @@
 This application is a simple yet powerful password generator built using Wails and React. It allows the user to generate a password of a specified length, including a mix of uppercase letters, lowercase letters, numbers, and special characters.
 
 ## Images
-![img1](/imgs/img1.png)
-![img1](/imgs/img2.png)
+<img src="./imgs/img1.png" width="420" height="300" alt="img1">
+<img src="./imgs/img2.png" width="420" height="300" alt="img1">
+
 
 ## Prerequisites
 
